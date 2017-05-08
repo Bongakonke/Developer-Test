@@ -1,0 +1,19 @@
+{
+  "name": "ums",
+  "version": "1.0.0",
+  "description": "user management system",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Bonga Mzimela",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.8",
+    "morgan": "^1.8.1"
+  }
+}

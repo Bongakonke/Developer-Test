@@ -1,0 +1,17 @@
+<div class="page-header">
+    <h1>Add User</h1>
+</div>
+<form ng-submit="register.regUser(regData);">
+    <label>First Name</label>
+    <input class="form-control" type="text" ng-model="register.regData.fistName" name="firstName" placeholder="Enter first name" />
+    <label>Last Name</label>
+    <input class="form-control" type="text" ng-model="register.regData.lastName" name="lastName" placeholder="Enter lastname" />
+    <label>Email Address</label>
+    <input class="form-control" type="text" ng-model="register.regData.emailAddress" name="emailAddress" placeholder="Enter email address" />
+    <label>Cell Number</label>
+    <input class="form-control" type="text" ng-model="register.regData.cellNumber" name="cellNumber" placeholder="Enter cell number" />
+    <label>Password</label>
+    <input class="form-control" type="password" ng-model="register.regData.password" name="password" placeholder="Enter password" />
+    <br />
+    <button class="btn btn-primary" type="submit">Add</button>
+</form>
