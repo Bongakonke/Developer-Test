@@ -14,16 +14,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use("/api", appRoutes);
 
-mongoose.connect("mongodb://localhost:27017/users", function (err) {
+mongoose.connect("mongodb://localhost:27017/developer-test", function (err) {
     if (err) {
         console.log("DB Not Connected");
     } else {
         console.log("DB Connected");
     }
     
-});
-app.get("/home", function (req, res) {
-    res.send("Foo");
 });
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname + "/public/app/views/index.html"));
