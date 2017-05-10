@@ -3,6 +3,7 @@ angular.module("userControllers", ["userServices"]).controller("regUser", functi
     var app = this;
     this.regUser = function (regData) {
         app.loading = true;
+        app.errorMsg = false;
         console.log("Testing user controller file");
 
         User.create(app.regData).then(function (data) {

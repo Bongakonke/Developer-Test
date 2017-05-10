@@ -1,25 +1,25 @@
 <div class="page-header">
-    <h1>Login</h1>
+    <h1>Login Page</h1>
 </div>
 
-<div class="jumbotron text-center" ng-show="register.loading">
+<div class="jumbotron text-center" ng-show="main.loading">
     <span class="glyphicon glyphicon-repeat spinner">
         <p>Loading ...</p>
 
     </span>
 </div>
-<div class="row show-hide-message" ng-show="register.successMsg">
-    <div class="alert alert-success">{{register.successMsg}}</div>
+<div class="row show-hide-message" ng-show="main.successMsg">
+    <div class="alert alert-success">{{main.successMsg}}</div>
 </div>
-<div class="row show-hide-message" ng-show="register.errorMsg">
-    <div class="alert alert-danger">{{register.errorMsg}}</div>
+<div class="row show-hide-message" ng-show="main.errorMsg">
+    <div class="alert alert-danger">{{main.errorMsg}}</div>
 </div>
 <br />
-<form ng-submit="register.regUser(regData);">
+<form ng-submit="main.dologin(loginData);">
     <label>Email Address</label>
-    <input class="form-control" type="text" ng-model="register.regData.emailAddress" name="emailAddress" placeholder="Enter email address" />
+    <input class="form-control" type="text" ng-model="main.loginData.emailAddress" name="emailAddress" placeholder="Enter email address" />
     <label>Password</label>
-    <input class="form-control" type="password" ng-model="register.regData.password" name="password" placeholder="Enter password" />
+    <input class="form-control" type="password" ng-model="main.loginData.password" name="password" placeholder="Enter password" />
     <br />
     <button class="btn btn-primary" type="submit">Login</button>
 </form>
