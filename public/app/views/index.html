@@ -24,8 +24,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular-animate.js"></script>
     <script src="app/app.js"></script>
     <script src="app/routes.js"></script>
+
     <script src="app/controllers/userCtrl.js"></script>
     <script src="app/controllers/mainCtrl.js"></script>
+    <script src="app/controllers/managementCtrl.js"></script>
+
     <script src="app/services/userServices.js"></script>
     <script src="app/services/authServices.js"></script>
 
@@ -48,12 +51,13 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a ng-show="main.isLoggedIn" href="/">Home</a></li>
-            <li><a ng-show="main.isLoggedIn" href="/adduser">Add User</a></li>
+            <li><a ng-show="main.isLoggedIn && main.authorized" href="/adduser">Add User</a></li>
             <li><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
+            <li><a ng-show="main.isLoggedIn && main.authorized" href="/management">Management</a></li>
             <li><a href="/about">About</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
-            <li><a ng-show="main.isLoggedIn" href="/profile">Hello {{main.firstName}}</a></li>
+            <li><a ng-show="main.isLoggedIn" href="/profile">My Profile : {{main.firstName}}</a></li>
             <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout();">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->

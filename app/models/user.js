@@ -7,10 +7,11 @@ var userSchema = new Schema({
     emailAddress: { type: String, lowercase: true, required: true, unique: true },
     lastName: { type: String},
     cellNumber: { type: String},
-    isLocked: { type: Boolean},
+    isLocked: { type: Boolean, default: false},
     createdDate: { type: Date },
     lastModified: { type: Date},
-    password: { type: String}
+    password: { type: String },
+    permission: {type: String, required: true, default: "user"}
 });
 
 userSchema.pre("save", function (next) {

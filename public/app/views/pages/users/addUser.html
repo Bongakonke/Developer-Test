@@ -15,17 +15,17 @@
     <div class="alert alert-danger">{{register.errorMsg}}</div>
 </div>
 <br />
-<form ng-submit="register.regUser(regData);">
+<form name="addUser" ng-submit="register.regUser(regData);">
     <label>First Name</label>
-    <input class="form-control" type="text" ng-model="register.regData.firstName" name="firstName" placeholder="Enter first name" />
+    <input class="form-control" type="text" ng-model="register.regData.firstName" name="firstName" placeholder="Enter first name" required/>
     <label>Last Name</label>
-    <input class="form-control" type="text" ng-model="register.regData.lastName" name="lastName" placeholder="Enter lastname" />
+    <input class="form-control" type="text" ng-model="register.regData.lastName" name="lastName" placeholder="Enter lastname" required />
     <label>Cell Number</label>
-    <input class="form-control" type="text" ng-model="register.regData.cellNumber" name="cellNumber" placeholder="Enter cell number" />
+    <input class="form-control" type="text" ng-model="register.regData.cellNumber" name="cellNumber" placeholder="Enter cell number" required />
     <label>Email Address</label>
-    <input class="form-control" type="text" ng-model="register.regData.emailAddress" name="emailAddress" placeholder="Enter email address" />
+    <input class="form-control" type="email" ng-model="register.regData.emailAddress" name="emailAddress" placeholder="Enter email address" required />
     <label>Password</label>
-    <input class="form-control" type="password" ng-model="register.regData.password" name="password" placeholder="Enter password" />
+    <input class="form-control" type="password" ng-model="register.regData.password" name="password" placeholder="Enter password" required />
     <br />
     <button class="btn btn-primary" type="submit">Add</button>
 </form>

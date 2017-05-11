@@ -29,6 +29,14 @@ var app = angular.module("appRoutes", ["ngRoute"])
                 authenticated: true
             })
 
+            .when("/management", {
+                templateUrl: "app/views/pages/management/management.html",
+                controller: "managementCtrl",
+                controllerAs: "management",
+                authenticated: true,
+                permission: "admin",
+            })
+
             .when("/logout", {
                 templateUrl: "app/views/pages/users/logout.html",
                 authenticated: true
@@ -42,15 +50,23 @@ var app = angular.module("appRoutes", ["ngRoute"])
     });
 });
 
-app.run(["$rootScope", "Auth", "$location", function ($rootScope, Auth, $location) {
+app.run(["$rootScope", "Auth", "$location", "User", function ($rootScope, Auth, $location, User) {
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
         console.log("Authenticated: " + next.$$route.authenticated);
 
         if(next.$$route.authenticated == true) {
             console.log("Authentication required");
-            if(!Auth.isLoggedIn()) {
+            if (!Auth.isLoggedIn()) {
                 event.preventDefault();
                 $location.path("/login");
+            } else if(next.$$route.permission) {
+                User.getPermission().then(function (data) {
+                    console.log(data.data.permission);
+                    if (next.$$route.permission !== data.data.permission) {
+                        event.preventDefault(); // If at least one role does not match, prevent accessing route
+                        $location.path('/profile'); // Redirect to profile instead
+                    }
+                });
             }
         } else if (next.$$route.authenticated == false) {
             if(Auth.isLoggedIn()) {

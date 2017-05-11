@@ -1,4 +1,4 @@
-angular.module("mainController", ["authServices"]).controller("mainCtrl", function (Auth, $timeout, $location, $rootScope) {
+angular.module("mainController", ["authServices"]).controller("mainCtrl", function (Auth, $timeout, $location, $rootScope, User) {
     console.log("Testing main controller");
 
     var app = this;
@@ -13,7 +13,16 @@ angular.module("mainController", ["authServices"]).controller("mainCtrl", functi
                 app.firstName = data.data.firstName;
                 app.emailAddress = data.data.emailAddress;
                 app.isLoggedIn = true;
-                app.loadme = true;
+
+                User.getPermission().then(function (data) {
+                    if (data.data.permission == "admin") {
+                        app.authorized = true;
+                        app.loadme = true;
+                    } else {
+                        app.loadme = true;
+                    }
+                });
+
             });
         } else {
             console.log("Faillure: User is not logged in");
@@ -39,7 +48,7 @@ angular.module("mainController", ["authServices"]).controller("mainCtrl", functi
                     $location.path("/");
                     app.loginData = "";
                     app.successMsg = false;
-                }, 2000);
+                }, 1000);
 
             } else {
                 app.loading = false;
@@ -52,10 +61,7 @@ angular.module("mainController", ["authServices"]).controller("mainCtrl", functi
         Auth.logout();
         $timeout(function () {
             $location.path("/logout");
-            $timeout(function () {
-                $location.path("/");
-            }, 2000);
-        }, 500);
+        }, 1000);
     };
 
 });

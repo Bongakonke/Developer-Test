@@ -14,7 +14,7 @@ angular.module("userControllers", ["userServices"]).controller("regUser", functi
                 app.loading = false;
                 app.successMsg = data.data.message + "... redirecting";
                 $timeout(function() {
-                   $location.path("/");
+                   $location.path("/management");
                 }, 2000);
                
             } else {

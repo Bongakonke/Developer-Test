@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use("/api", appRoutes);
 
-mongoose.connect("mongodb://localhost:27017/developer-test", function (err) {
+mongoose.connect("mongodb://devuser:D3vuS3r@ds060009.mlab.com:60009/developer-test-database", function (err) {
     if (err) {
         console.log("DB Not Connected");
     } else {

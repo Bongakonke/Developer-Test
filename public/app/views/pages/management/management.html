@@ -1,0 +1,50 @@
+<div class="page-header">
+    <h1>User Management</h1>
+</div>
+<div class="jumbotron text-center" ng-show="management.loading">
+    <span class="glyphicon glyphicon-repeat spinner">
+        <p>Loading ...</p>
+
+    </span>
+</div>
+<div class="row show-hide-message" ng-show="management.successMsg">
+    <div class="alert alert-success">{{management.successMsg}}</div>
+</div>
+<div class="row show-hide-message" ng-show="management.errorMsg">
+    <div class="alert alert-danger">{{management.errorMsg}}</div>
+</div>
+<br />
+
+<div>
+    <table class="table">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Cell Number</th>
+            <th>Email Address</th>
+            <th>Locked</th>
+            <th>Role</th>
+            <th>Created Date</th>
+            <th>Last Modified</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="person in management.users">
+            <td>{{ person.firstName }}</td>
+            <td>{{ person.lastName }}</td>
+            <td>{{ person.cellNumber }}</td>
+            <td>{{ person.emailAddress }}</td>
+            <td>{{ person.isLocked }}</td>
+            <td>{{ person.permission }}</td>
+            <td>{{ person.createdDate }}</td>
+            <td>{{ person.lastModified }}</td>
+            <td>
+                <a href="#">
+                    <button type="button" class="btn btn-primary btn-sm">EDIT</button>
+                </a>
+                <a href="#">
+                    <button type="button" ng-click="management.deleteUser(person.emailAddress);" class="btn btn-danger btn-sm">DEL</button>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -8,6 +8,7 @@ module.exports = function (router) {
         req.body.createdDate = new Date();
         req.body.lastModified = new Date();
         req.body.isLocked = false;
+        req.body.permission = "user";
 
         var user = new User();
 
@@ -19,6 +20,7 @@ module.exports = function (router) {
         user.isLocked = req.body.isLocked;
         user.createdDate = req.body.createdDate;
         user.lastModified = req.body.lastModified;
+        user.permission = req.body.permission;
 
         if (req.body.emailAddress == null || req.body.emailAddress == "" || req.body.password == null || req.body.password == "" || req.body.firstName == null || req.body.firstName == "" || req.body.lastName == null || req.body.lastName == "" || req.body.cellNumber == null || req.body.cellNumber == "") {
             res.json({success: false, message: "Ensure all fields are filled up"});
@@ -77,6 +79,49 @@ module.exports = function (router) {
     router.post("/me", function (req, res) {
         res.send(req.decoded);
     });
+
+    router.get("/permission", function (req, res) {
+        User.findOne({ emailAddress: req.decoded.emailAddress }, function (err, user) {
+            if (err) throw err;
+            if (!user) {
+                res.json({ success: false, message: "No user was found" });
+            } else {
+                res.json({ success: true, permission: user.permission });
+            }
+        });
+    });
+
+    router.get("/management", function (req, res) {
+        User.find({}, function (err, users) {
+            if (err) throw err;
+            User.findOne({ emailAddress: req.decoded.emailAddress }, function (err, mainUser) {
+                if (err) throw err;
+                if (!mainUser) {
+                    res.json({ success: false, message: "No user found" });
+                } else {
+                    if (mainUser.permission == "admin") {
+                        if (!users) {
+                            res.json({ success: false, message: "Users not found" });
+                        } else {
+                            res.json({ success: true, users: users, permission: mainUser.permission });
+                        }
+
+                    } else {
+                        res.json({ success: false, message: "You dont have the required rights" });
+                    }
+                }
+            });
+        });
+    });
+
+    router.delete("/management/:emailAddress", function (req, res) {
+        var deleteUser = req.params.emailAddress;
+
+        User.findOneAndRemove({ emailAddress: deleteUser }, function (err, user) {
+            if (err) throw err;
+            res.json({ success: true });
+        })
+    })
 
     return router;
 };

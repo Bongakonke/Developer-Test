@@ -17,9 +17,9 @@
 <br />
 <form ng-submit="main.dologin(loginData);">
     <label>Email Address</label>
-    <input class="form-control" type="text" ng-model="main.loginData.emailAddress" name="emailAddress" placeholder="Enter email address" />
+    <input class="form-control" type="email" ng-model="main.loginData.emailAddress" name="emailAddress" placeholder="Enter email address" required />
     <label>Password</label>
-    <input class="form-control" type="password" ng-model="main.loginData.password" name="password" placeholder="Enter password" />
+    <input class="form-control" type="password" ng-model="main.loginData.password" name="password" placeholder="Enter password" required />
     <br />
     <button class="btn btn-primary" type="submit">Login</button>
 </form>
